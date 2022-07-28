@@ -1,0 +1,20 @@
+#post {
+  border-collapse: collapse;
+  font-size: 2rem;
+  width: 100%;
+}
+.title {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+.label {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+.row {
+  &:nth-child(even) {
+    background-color: #dddddd;
+  }
+}
