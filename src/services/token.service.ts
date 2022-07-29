@@ -16,18 +16,18 @@ const updateLocalAccessToken = (token: string) => {
 
 const getUser = () => {
   if (typeof window !== "undefined") {
-    return JSON.parse(localStorage.getItem("accessToken") as any);
+    return JSON.parse(localStorage.getItem("user") as any);
   }
 };
 
-const setUser = (token: any) => {
+const setUser = (user: any) => {
   if (typeof window !== "undefined") {
-    localStorage.setItem("accessToken", JSON.stringify(token));
+    localStorage.setItem("user", JSON.stringify(user));
   }
 };
 
 const removeUser = () => {
-  localStorage.removeItem("accessToken");
+  localStorage.removeItem("user");
 };
 
 const TokenService = {
