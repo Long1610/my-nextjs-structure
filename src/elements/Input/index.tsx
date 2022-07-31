@@ -1,22 +1,23 @@
+import { TextField } from "@mui/material";
 import React from "react";
-import styles from "./Input.module.scss";
 
 interface input {
-  onChange: (e: any) => void;
+  onChange?: (e: any) => void;
   type: string;
   placeholder: string;
-  name: string;
+  className?: string;
 }
 
-const Input = ({ onChange, type, placeholder, name }: input) => {
+const Input = ({ onChange, type, placeholder, className }: input) => {
   return (
     <>
-      <input
+      <TextField
         type={type}
+        label={placeholder}
         onChange={onChange}
-        className={styles.input}
-        placeholder={placeholder}
-        name={name}
+        className={className}
+        fullWidth
+        margin="dense"
       />
     </>
   );

@@ -3,22 +3,27 @@ import Link from "next/link";
 import styles from "./Header.module.scss";
 import TokenService from "services/token.service";
 import { useRouter } from "next/router";
-import { useAppDispatch } from "app/hooks";
-import { reset } from "containers/user/userSlice";
 import { UserContext } from "providers/userContext";
 
 const Header = () => {
-  const dispatch = useAppDispatch();
+  const [isLogin, setIsLogin] = useState(false);
   const router = useRouter();
   const [user, setUser] = useContext(UserContext) as any;
-
-  const us = TokenService.getUser();
 
   const logOut = () => {
     TokenService.removeUser();
     setUser({});
     router.push("/signin");
   };
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user") as any);
+    if (user) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, [user]);
 
   return (
     <header className={styles.header}>
@@ -31,7 +36,7 @@ const Header = () => {
             <a className={styles.a}>Home</a>
           </Link>
 
-          {!us?.token && (
+          {!isLogin && (
             <>
               <Link href="/signin">
                 <a className={styles.a}>Sign in</a>
@@ -45,7 +50,7 @@ const Header = () => {
           <Link href="/about">
             <a className={styles.a}>About</a>
           </Link>
-          {us?.token && (
+          {isLogin && (
             <button onClick={logOut} className={styles.log_out}>
               Log out
             </button>
