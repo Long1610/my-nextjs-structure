@@ -8,17 +8,17 @@ const instance = axios.create({
   },
 });
 
-// instance.interceptors.request.use(
-//   (config) => {
-//     const token = TokenService.getLocalAccessToken();
-//     if (token) {
-//       config.headers!["Authorization"] = "Bearer " + token;
-//     }
-//     return config;
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   }
-// );
+instance.interceptors.request.use(
+  (config) => {
+    const user = TokenService.getUser();
+    if (user?.token) {
+      config.headers!["Authorization"] = "Token " + user?.token;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export default instance;

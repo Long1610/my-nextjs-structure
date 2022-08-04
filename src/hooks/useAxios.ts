@@ -1,3 +1,4 @@
+import { isEmpty } from "lodash";
 import { useCallback, useEffect, useState } from "react";
 
 export const useAxios = (api: any, body?: any) => {
@@ -6,29 +7,42 @@ export const useAxios = (api: any, body?: any) => {
   const [loading, setLoading] = useState(false);
 
   const [isClick, setIsClick] = useState(false);
+  const [showAlertSuccess, setShowAlertSuccess] = useState(false);
+  const [showAlertError, setShowAlertError] = useState(false);
 
-  const fetchData = useCallback(
-    async (api: any) => {
-      setLoading(true);
-      try {
-        const result = await api(body);
-        setResponse(result.data);
-      } catch (error) {
-        setError(error as any);
-        console.log(error);
-      } finally {
-        setLoading(false);
-        setIsClick(false);
-      }
-    },
-    [body]
-  );
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const result = await api(body);
+      setResponse(result.data);
+      setShowAlertSuccess(true);
+    } catch (error) {
+      setError(error as any);
+      setShowAlertError(true);
+    } finally {
+      setLoading(false);
+      setIsClick(false);
+    }
+  }, [body, api]);
 
   useEffect(() => {
-    if (isClick) {
-      fetchData(api);
+    if (isEmpty(body) || isClick) {
+      fetchData();
     }
-  }, [isClick, fetchData, api]);
+    return () => {
+      setIsClick(false);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isClick]);
 
-  return [response, error, loading, setIsClick];
+  return [
+    response,
+    error,
+    loading,
+    setIsClick,
+    showAlertSuccess,
+    setShowAlertSuccess,
+    showAlertError,
+    setShowAlertError,
+  ];
 };

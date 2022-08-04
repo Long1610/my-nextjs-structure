@@ -28,11 +28,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [router.asPath]);
 
-  function authCheck(url: any) {
+  const authCheck = (url: any) => {
     // redirect to login page if accessing a private page and not logged in
-    const publicPaths = ["/signin", "/signup", "/"];
+    const publicPaths = ["/signin", "/signup/vendor", "/"];
     const path = url.split("?")[0];
     if (!TokenService.getUser() && !publicPaths.includes(path)) {
       setAuthorized(false);
@@ -43,7 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     } else {
       setAuthorized(true);
     }
-  }
+  };
 
   return (
     <AppProvider>

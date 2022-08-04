@@ -1,32 +1,11 @@
 import api from "./api";
-import { post } from "types/post.interface";
 
 const getPosts = () => {
-  return api.get("/posts");
-};
-
-const getPostDetail = (id: number) => {
-  return api.get(`/posts/${id}`);
-};
-
-const createPost = (data: post) => {
-  return api.post("/posts", data);
-};
-
-const updatePost = (id: number, data: post) => {
-  return api.post(`/posts/${id}`, data);
-};
-
-const deletePost = (id: number) => {
-  return api.delete(`/posts/${id}`);
+  return api.get(`/articles/feed?limit=10&offset=0`);
 };
 
 const PostService = {
   getPosts,
-  getPostDetail,
-  createPost,
-  updatePost,
-  deletePost,
 };
 
 export default PostService;

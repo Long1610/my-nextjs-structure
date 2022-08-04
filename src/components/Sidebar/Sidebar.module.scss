@@ -1,0 +1,45 @@
+@import "../../assets/scss/_variables.scss";
+
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: grey;
+  overflow-x: hidden;
+  a {
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+  }
+  .menu {
+    padding: $paddingNormal;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .logo {
+    padding: $paddingNormal;
+    a {
+      font-size: 25px;
+    }
+  }
+
+  .account {
+    position: absolute;
+    bottom: 0;
+    padding: $paddingNormal;
+    width: 100%;
+    .bottom {
+      padding-top: 10px;
+    }
+  }
+  .sidebar_item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+}
