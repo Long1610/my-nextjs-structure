@@ -30,7 +30,6 @@ const CustomInput = ({ type, label, control, name, start, end }: input) => {
               onChange={onChange}
               value={value}
               className={styles.input}
-              style={{}}
             />
           )}
         />

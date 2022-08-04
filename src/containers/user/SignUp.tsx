@@ -12,7 +12,7 @@ import { Grid, Typography, Alert, IconButton, Button } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Link from "next/link";
 import styles from "./User.module.scss";
-import CustomInput from "elements/CustomInput";
+import Input from "elements/Input";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 interface SignUp {
@@ -81,7 +81,6 @@ const SignUp = ({ isVendor }: SignUp) => {
         onClick={handleClickShowPassword}
         onMouseDown={handleMouseDownPassword}
         edge="end"
-        sx={{ marginLeft: "-40px" }}
       >
         {showPassword ? (
           <Visibility className={styles.icon} />
@@ -89,6 +88,19 @@ const SignUp = ({ isVendor }: SignUp) => {
           <VisibilityOff className={styles.icon} />
         )}
       </IconButton>
+    );
+  };
+
+  const ButtonCustom = () => {
+    return (
+      <button
+        style={{
+          alignSelf: "stretch",
+          width: "150px",
+        }}
+      >
+        Click
+      </button>
     );
   };
 
@@ -101,32 +113,16 @@ const SignUp = ({ isVendor }: SignUp) => {
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           <Grid container spacing={1}>
             <Grid item xs={12} sm={12}>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  gap: "25px",
-                }}
-              >
-                <CustomInput
-                  type="email"
-                  name="email"
-                  label="Email"
-                  control={control}
-                />
-                <button
-                  style={{
-                    alignSelf: "flex-end",
-                    height: "50px",
-                    width: "150px",
-                  }}
-                >
-                  Click
-                </button>
-              </Box>
+              <Input
+                type="email"
+                name="email"
+                label="Email"
+                control={control}
+                element={ButtonCustom}
+              />
             </Grid>
             <Grid item xs={12} sm={12}>
-              <CustomInput
+              <Input
                 type={showPassword ? "text" : "password"}
                 name="password"
                 label="Password"
@@ -138,7 +134,7 @@ const SignUp = ({ isVendor }: SignUp) => {
               </Typography>
             </Grid>
             <Grid item xs={12} sm={12}>
-              <CustomInput
+              <Input
                 type={showPassword ? "text" : "password"}
                 name="confirm password"
                 label="Confirm Password"

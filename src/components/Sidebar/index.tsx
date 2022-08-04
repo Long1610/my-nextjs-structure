@@ -48,7 +48,7 @@ const Sidebar = () => {
         </Box>
         <Box className={styles.sidebar_item}>
           <EventAvailableIcon />
-          <Link href="/about">
+          <Link href="/transactions">
             <a className={styles.a}>Transactions</a>
           </Link>
         </Box>

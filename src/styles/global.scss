@@ -35,3 +35,12 @@ html {
 a {
   text-decoration: none;
 }
+
+input {
+  padding: 10px 14px !important;
+  border: none;
+}
+
+label.Mui-focused {
+  color: black;
+}

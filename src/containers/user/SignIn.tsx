@@ -13,6 +13,7 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import Link from "next/link";
 import styles from "./User.module.scss";
 import CustomInput from "elements/CustomInput";
+import Input from "elements/Input";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const SignIn = () => {
@@ -77,7 +78,6 @@ const SignIn = () => {
         onClick={handleClickShowPassword}
         onMouseDown={handleMouseDownPassword}
         edge="end"
-        sx={{ marginLeft: "-40px" }}
       >
         {showPassword ? (
           <Visibility className={styles.icon} />
@@ -91,13 +91,13 @@ const SignIn = () => {
   return (
     <>
       <Box className={styles.sign_in}>
-        <Typography variant="h4" mb={3} color="GrayText">
+        <Typography variant="h4" mb={2} color="GrayText">
           Tech cent
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           <Grid container spacing={1}>
             <Grid item xs={12} sm={12}>
-              <CustomInput
+              <Input
                 type="email"
                 name="email"
                 label="Email"
@@ -108,7 +108,7 @@ const SignIn = () => {
               </Typography>
             </Grid>
             <Grid item xs={12} sm={12}>
-              <CustomInput
+              <Input
                 type={showPassword ? "text" : "password"}
                 name="password"
                 label="Password"

@@ -2,11 +2,15 @@ import { useGetAxios } from "hooks/useGetAxios";
 import React, { useEffect } from "react";
 import PostService from "services/post.service";
 
-const About = () => {
+const Transactions = () => {
   const [postResponse, postError, postLoading] = useGetAxios(
     PostService.getPosts
   );
-  return <div>About</div>;
+  return (
+    <div>
+      <h1>Transactions</h1>
+    </div>
+  );
 };
 
-export default About;
+export default Transactions;
