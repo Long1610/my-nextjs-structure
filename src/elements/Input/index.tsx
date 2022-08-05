@@ -13,21 +13,10 @@ interface input {
   element?: any;
 }
 
-const style = {
-  "& label.Mui-focused": {
-    color: "black",
-  },
-  "& .MuiOutlinedInput-root": {
-    "&.Mui-focused fieldset": {
-      borderColor: "black",
-    },
-  },
-};
-
 const Input = ({ type, label, control, name, start, end, element }: input) => {
   return (
     <Box className={styles.input_wrapper}>
-      <InputLabel htmlFor={name} className={styles.label}>
+      <InputLabel htmlFor={name} color="info" className={styles.label}>
         {label}
       </InputLabel>
       <Box className={styles.container}>
@@ -41,7 +30,7 @@ const Input = ({ type, label, control, name, start, end, element }: input) => {
               onChange={onChange}
               value={value}
               className={styles.input}
-              sx={style}
+              fullWidth
               InputProps={{
                 startAdornment: start && (
                   <InputAdornment position="start">{start()}</InputAdornment>

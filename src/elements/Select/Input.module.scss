@@ -1,0 +1,14 @@
+.select_wrapper {
+  text-align: left;
+  flex: 1;
+  .input {
+    border-radius: 5px;
+    font-size: 15px;
+  }
+  .label {
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    color: black;
+  }
+}

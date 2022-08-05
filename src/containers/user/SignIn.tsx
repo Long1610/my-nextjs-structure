@@ -136,7 +136,7 @@ const SignIn = () => {
             <Link href="/signup/vendor">
               <a className={styles.a}>Vendor</a>
             </Link>
-            <Link href="/signup">
+            <Link href="/signup/customer">
               <a className={styles.a}>Customer</a>
             </Link>
           </Box>

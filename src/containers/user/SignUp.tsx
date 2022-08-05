@@ -14,6 +14,8 @@ import Link from "next/link";
 import styles from "./User.module.scss";
 import Input from "elements/Input";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import SelectCustom from "elements/Select";
 
 interface SignUp {
   isVendor?: boolean;
@@ -30,6 +32,8 @@ const SignUp = ({ isVendor }: SignUp) => {
   const defaultValues = {
     email: "",
     password: "",
+    confirmPassword: "",
+    tech: "",
   };
 
   const formOptions = {
@@ -52,7 +56,7 @@ const SignUp = ({ isVendor }: SignUp) => {
   );
 
   const onSubmit = (data: any) => {
-    setIsClick(true);
+    alert(JSON.stringify(data));
   };
 
   useEffect(() => {
@@ -91,12 +95,18 @@ const SignUp = ({ isVendor }: SignUp) => {
     );
   };
 
+  const CheckIcon = () => {
+    return <CheckCircleOutlineIcon />;
+  };
+
   const ButtonCustom = () => {
     return (
       <button
         style={{
           alignSelf: "stretch",
           width: "150px",
+          backgroundColor: "transparent",
+          borderRadius: "5px",
         }}
       >
         Click
@@ -119,6 +129,7 @@ const SignUp = ({ isVendor }: SignUp) => {
                 label="Email"
                 control={control}
                 element={ButtonCustom}
+                end={CheckIcon}
               />
             </Grid>
             <Grid item xs={12} sm={12}>
@@ -136,11 +147,19 @@ const SignUp = ({ isVendor }: SignUp) => {
             <Grid item xs={12} sm={12}>
               <Input
                 type={showPassword ? "text" : "password"}
-                name="confirm password"
+                name="confirmPassword"
                 label="Confirm Password"
                 control={control}
                 end={EndComponent}
               />
+              <Typography variant="inherit" color="textSecondary">
+                {errors.confirmPassword?.message}
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              {isVendor && (
+                <SelectCustom label="Tech" control={control} name="tech" />
+              )}
               <Typography variant="inherit" color="textSecondary">
                 {errors.password?.message}
               </Typography>
