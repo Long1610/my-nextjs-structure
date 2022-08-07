@@ -8,13 +8,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { Box } from "@mui/system";
-import { Grid, Typography, Alert, IconButton, Button } from "@mui/material";
-import LoadingButton from "@mui/lab/LoadingButton";
+import { Grid, Typography, IconButton } from "@mui/material";
 import Link from "next/link";
 import styles from "./User.module.scss";
-import CustomInput from "elements/CustomInput";
 import Input from "elements/Input";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import ButtonCustom from "elements/Button";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -121,16 +120,11 @@ const SignIn = () => {
             </Grid>
           </Grid>
           <Box mt={3}>
-            <LoadingButton
-              color="inherit"
-              size="large"
-              type="submit"
-              fullWidth
-              loading={signInloading}
-              variant="contained"
-            >
-              Sign In
-            </LoadingButton>
+            <ButtonCustom
+              title="Sign in"
+              cate="standard"
+              isLoading={signInloading}
+            />
           </Box>
           <Box mt={2} className={styles.bottom_signup}>
             <Link href="/signup/vendor">

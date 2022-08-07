@@ -1,4 +1,3 @@
-import { isEmpty } from "lodash";
 import { useCallback, useEffect, useState } from "react";
 
 export const useAxios = (api: any, body?: any) => {
@@ -10,7 +9,7 @@ export const useAxios = (api: any, body?: any) => {
   const [showAlertSuccess, setShowAlertSuccess] = useState(false);
   const [showAlertError, setShowAlertError] = useState(false);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     setLoading(true);
     try {
       const result = await api(body);
@@ -23,10 +22,10 @@ export const useAxios = (api: any, body?: any) => {
       setLoading(false);
       setIsClick(false);
     }
-  }, [body, api]);
+  };
 
   useEffect(() => {
-    if (isEmpty(body) || isClick) {
+    if (isClick) {
       fetchData();
     }
     return () => {

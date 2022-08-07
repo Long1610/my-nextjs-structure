@@ -10,6 +10,9 @@
   font-style: italic;
 }
 
+@import "../assets/scss/_variables.scss";
+@import "../assets/scss/_mixins.scss";
+
 body {
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
@@ -42,7 +45,7 @@ a {
 
 .MuiOutlinedInput-root.Mui-focused {
   .MuiOutlinedInput-notchedOutline {
-    border-color: black;
+    border-color: $blackBasic;
   }
 }
 
@@ -54,4 +57,10 @@ a {
     pointer-events: none;
     color: rgba(0, 0, 0, 0.54);
   }
+}
+
+.MuiCircularProgress-root {
+  width: 20px !important;
+  height: 20px !important;
+  color: $greyf3;
 }

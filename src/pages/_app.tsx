@@ -5,10 +5,37 @@ import { useRouter } from "next/router";
 import "styles/global.scss";
 import TokenService from "services/token.service";
 import { AppProvider } from "providers/appProvider";
+import ModalComponent from "components/Modal";
+
+const style = {
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const handleConfirm = () => {
+    setOpen(false);
+    router.push({
+      pathname: "/signin",
+      query: { returnUrl: router.asPath },
+    });
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    router.push({ pathname: "/" });
+  };
 
   useEffect(() => {
     // on initial load - run auth check
@@ -32,14 +59,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const authCheck = (url: any) => {
     // redirect to login page if accessing a private page and not logged in
-    const publicPaths = ["/signin", "/signup/vendor", "/", "/signup/customer"];
+    const publicPaths = ["/transactions"];
     const path = url.split("?")[0];
-    if (!TokenService.getUser() && !publicPaths.includes(path)) {
+    if (!TokenService.getUser() && publicPaths.includes(path)) {
       setAuthorized(false);
-      router.push({
-        pathname: "/signin",
-        query: { returnUrl: router.asPath },
-      });
+      setOpen(true);
     } else {
       setAuthorized(true);
     }
@@ -47,7 +71,16 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <AppProvider>
-      <Layout>{authorized && <Component {...pageProps} />}</Layout>
+      <Layout>
+        <ModalComponent
+          open={open}
+          onClose={handleClose}
+          onConfirm={handleConfirm}
+          title="Do you want to login ?"
+          style={style}
+        />
+        {authorized && <Component {...pageProps} />}
+      </Layout>
     </AppProvider>
   );
 }

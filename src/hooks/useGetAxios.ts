@@ -6,7 +6,7 @@ export const useGetAxios = (api: any) => {
   const [error, setError] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     setLoading(true);
     try {
       const result = await api();
@@ -16,7 +16,7 @@ export const useGetAxios = (api: any) => {
     } finally {
       setLoading(false);
     }
-  }, [api]);
+  };
 
   useEffect(() => {
     fetchData();
